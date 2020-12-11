@@ -95,17 +95,29 @@ public class CourseController extends JPanel implements Observer, ChangeListener
 	/**
 	 * Informs this CourseController that a new course has been added
 	 * 
-	 * @param o
-	 *            the CourseData subject that has changed
+	 * @param o the CourseData subject that has changed
 	 */
 	@Override
-	 public void update(Observable o, Object arg) {
+	public void update(Observable o) {
 		CourseData courses = (CourseData) o;
 		Vector<CourseRecord> newCourses = courses.getUpdate();
 		for (int i = sliders.size(); i < newCourses.size(); i++) {
 			this.addCourse((CourseRecord) newCourses.elementAt(i));
 		}
 	} 
+
+	/**
+	 * Informs this CourseController that a new course has been added
+	 *
+	 * @param o the CourseData subject that has changed
+	 */
+	@Override
+	public void update(Object o) {
+		Vector<CourseRecord> newCourses = (Vector<CourseRecord>) o;
+		for (int i = sliders.size(); i < newCourses.size(); i++) {
+			this.addCourse((CourseRecord) newCourses.elementAt(i));
+		}
+	}
 
 	/**
 	 * Manages the creation of a new course. Called when the "New Course" button is pressed.
@@ -146,8 +158,13 @@ public class CourseController extends JPanel implements Observer, ChangeListener
 
 		CourseController controller = new CourseController(data);
 		BarChartObserver bar = new BarChartObserver(data);
+		PieChartObserver pie = new PieChartObserver(data);
 
-		JScrollPane scrollPane = new JScrollPane(bar,
+		JPanel charts = new JPanel();
+		charts.add(bar);
+		charts.add(pie);
+
+		JScrollPane scrollPane = new JScrollPane(charts,
 				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
@@ -177,5 +194,6 @@ public class CourseController extends JPanel implements Observer, ChangeListener
 	private Vector<JSlider> sliders;
 
 	private JPanel coursePanel;
+
 
 }

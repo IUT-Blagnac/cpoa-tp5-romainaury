@@ -26,8 +26,7 @@ public class BarChartObserver extends JPanel implements Observer {
 		data.attach(this);
 		this.courseData = data.getUpdate();
 		this.setPreferredSize(new Dimension(2 * LayoutConstants.xOffset
-				+ (LayoutConstants.barSpacing + LayoutConstants.barWidth)
-				* this.courseData.size(), LayoutConstants.graphHeight + 2
+		+ LayoutConstants.graphWidth, LayoutConstants.graphHeight + 2
 				* LayoutConstants.yOffset));
 		this.setBackground(Color.white);
 	}
@@ -61,25 +60,6 @@ public class BarChartObserver extends JPanel implements Observer {
 							* LayoutConstants.barWidth, LayoutConstants.yOffset
 							+ LayoutConstants.graphHeight + 20);
 		}
-
-		int radius = 100;
-	
-		//first compute the total number of students
-		double total = 0.0;
-		for (int i = 0; i < courseData.size(); i++) {
-			total += courseData.elementAt(i).getNumOfStudents();
-		}
-		//if total == 0 nothing to draw
-		if (total != 0) {
-			double startAngle = 0.0;
-			for (int i = 0; i < courseData.size(); i++) {
-				double ratio = (courseData.elementAt(i).getNumOfStudents() / total) * 360.0;
-				//draw the arc
-				g.setColor(LayoutConstants.courseColours[i%LayoutConstants.courseColours.length]);
-				g.fillArc(LayoutConstants.xOffset + 300, LayoutConstants.yOffset , 2 * radius, 2 * radius, (int) startAngle, (int) ratio);
-				startAngle += ratio;
-			}
-		}
 	}
 
 
@@ -90,7 +70,7 @@ public class BarChartObserver extends JPanel implements Observer {
 	 *            the observed CourseData object that has changed
 	 */
 	@Override
-	public void update(Observable o, Object arg) {
+	public void update(Observable o) {
 		CourseData data = (CourseData) o;
 		this.courseData = data.getUpdate();
 
@@ -98,6 +78,24 @@ public class BarChartObserver extends JPanel implements Observer {
 				+ (LayoutConstants.barSpacing + LayoutConstants.barWidth)
 				* this.courseData.size(), LayoutConstants.graphHeight + 2
 				* LayoutConstants.yOffset));
+		this.revalidate();
+		this.repaint();
+	}
+
+	/**
+	 * Informs this observer that the observed CourseData object has changed
+	 *
+	 * @param o the observed CourseData object that has changed
+	 */
+	@Override
+	public void update(Object o) {
+		this.courseData = (Vector<CourseRecord>) o;
+
+		this.setPreferredSize(new Dimension(2 * LayoutConstants.xOffset
+				+ (LayoutConstants.barSpacing + LayoutConstants.barWidth)
+				* this.courseData.size(), LayoutConstants.graphHeight + 2
+				* LayoutConstants.yOffset));
+
 		this.revalidate();
 		this.repaint();
 	}

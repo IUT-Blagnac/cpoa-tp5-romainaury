@@ -2,18 +2,19 @@ package observer;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.Vector;
 
 /**
  	Represents some constants for the drawing of graphs in this example.
 */
 public class LayoutConstants {
 
-	public static final int xOffset = 350;
+	public static final int xOffset = 275;
 
 	public static final int yOffset = 30;
 
 	public static final int graphHeight = 210;
+
+	public static final int graphWidth = 210;
 
 	public static final int maxValue = 100;
 

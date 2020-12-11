@@ -42,7 +42,17 @@ public abstract class Observable {
 	public void notifyObservers() {
 		for (int i = 0; i < observers.size(); i++) {
 			Observer observer = observers.elementAt(i);
-			observer.update(this, null);
+			observer.update(this);
+		}
+	}
+
+	/**
+	 * Notify all Observers that Subject has changed
+	 */
+	public void notifyObservers(Object o) {
+		for (int i = 0; i < observers.size(); i++) {
+			Observer observer = observers.elementAt(i);
+			observer.update(o);
 		}
 	}
 
