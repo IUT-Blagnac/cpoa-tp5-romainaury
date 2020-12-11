@@ -113,10 +113,14 @@ public class CourseController extends JPanel implements Observer, ChangeListener
 	 */
 	@Override
 	public void update(Object o) {
-		Vector<CourseRecord> newCourses = (Vector<CourseRecord>) o;
-		for (int i = sliders.size(); i < newCourses.size(); i++) {
-			this.addCourse((CourseRecord) newCourses.elementAt(i));
+		CourseRecord cr = (CourseRecord) o;
+
+		for(JSlider s: sliders) {
+			if(s.getName().equals(cr.getName())){
+				return;
+			}
 		}
+		this.addCourse(cr);
 	}
 
 	/**

@@ -40,7 +40,7 @@ public class CourseData extends Observable {
 		}
 		if (!alreadyExists)
 			this.courseData.addElement(courseRecord);
-		this.notifyObservers(this.courseData);
+		this.notifyObservers(courseRecord);
 	}
 
 	/**
@@ -59,7 +59,11 @@ public class CourseData extends Observable {
 				i = courseData.size();
 			}
 		}
-		this.notifyObservers(this.courseData.clone());
+
+		for(CourseRecord cr: courseData) {
+			if(cr.getName().equals(subjectName))
+				this.notifyObservers(cr);
+		}
 	}
 
 	/**

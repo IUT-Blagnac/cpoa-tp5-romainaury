@@ -58,12 +58,10 @@ public class PieChartObserver extends JPanel implements Observer {
 		}
 	}
 
-
 	/**
 	 * Informs this observer that the observed CourseData object has changed
 	 * 
-	 * @param o
-	 *            the observed CourseData object that has changed
+	 * @param o the observed CourseData object that has changed
 	 */
 	@Override
 	public void update(Observable o) {
@@ -71,9 +69,8 @@ public class PieChartObserver extends JPanel implements Observer {
 		this.courseData = data.getUpdate();
 
 		this.setPreferredSize(new Dimension(2 * LayoutConstants.xOffset
-				+ (LayoutConstants.barSpacing + LayoutConstants.barWidth)
-				* this.courseData.size(), LayoutConstants.graphHeight + 2
-				* LayoutConstants.yOffset));
+				+ LayoutConstants.barSpacing + LayoutConstants.barWidth,
+				LayoutConstants.graphHeight + 2	* LayoutConstants.yOffset));
 		this.revalidate();
 		this.repaint();
 	}
@@ -81,17 +78,27 @@ public class PieChartObserver extends JPanel implements Observer {
 	/**
 	 * Informs this observer that the observed CourseData object has changed
 	 * 
-	 * @param o
-	 *            the new CourseData Vector that has changed
+	 * @param o the new CourseData Vector that has changed
 	 */
 	@Override
 	public void update(Object o) {
-		this.courseData = (Vector<CourseRecord>) o;
+		CourseRecord courseRecord = (CourseRecord) o;
+
+		boolean isIncluded = false;
+		for(CourseRecord cr: courseData) {
+			if (cr.getName().equals(courseRecord.getName())){
+				cr.setNumOfStudents(courseRecord.getNumOfStudents());
+				isIncluded = true;
+			}
+		}
+
+		if(!isIncluded) {
+			courseData.add(courseRecord);
+		}
 
 		this.setPreferredSize(new Dimension(2 * LayoutConstants.xOffset
-				+ (LayoutConstants.barSpacing + LayoutConstants.barWidth)
-				* this.courseData.size(), LayoutConstants.graphHeight + 2
-				* LayoutConstants.yOffset));
+				+ (LayoutConstants.barSpacing + LayoutConstants.barWidth), 
+				LayoutConstants.graphHeight + 2 * LayoutConstants.yOffset));
 		this.revalidate();
 		this.repaint();
 	}

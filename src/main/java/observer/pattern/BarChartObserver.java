@@ -89,7 +89,19 @@ public class BarChartObserver extends JPanel implements Observer {
 	 */
 	@Override
 	public void update(Object o) {
-		this.courseData = (Vector<CourseRecord>) o;
+		CourseRecord courseRecord = (CourseRecord) o;
+
+		boolean isIncluded = false;
+		for(CourseRecord cr: courseData) {
+			if (cr.getName().equals(courseRecord.getName())){
+				cr.setNumOfStudents(courseRecord.getNumOfStudents());
+				isIncluded = true;
+			}
+		}
+
+		if(!isIncluded) {
+			courseData.add(courseRecord);
+		}
 
 		this.setPreferredSize(new Dimension(2 * LayoutConstants.xOffset
 				+ (LayoutConstants.barSpacing + LayoutConstants.barWidth)
