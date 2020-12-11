@@ -98,7 +98,8 @@ public class CourseController extends JPanel implements Observer, ChangeListener
 	 * @param o
 	 *            the CourseData subject that has changed
 	 */
-	 public void update(Observable o) {
+	@Override
+	 public void update(Observable o, Object arg) {
 		CourseData courses = (CourseData) o;
 		Vector<CourseRecord> newCourses = courses.getUpdate();
 		for (int i = sliders.size(); i < newCourses.size(); i++) {
@@ -176,4 +177,5 @@ public class CourseController extends JPanel implements Observer, ChangeListener
 	private Vector<JSlider> sliders;
 
 	private JPanel coursePanel;
+
 }
