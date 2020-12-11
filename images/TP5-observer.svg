@@ -15,6 +15,7 @@ reverse link Observer to CourseController--><path d="M281.94,83.64 C295.77,97.86
 reverse link ChangeListener to CourseController--><path d="M522.19,77.01 C507.22,92.69 489.27,111.49 471.79,129.8 " fill="none" id="ChangeListener&lt;-CourseController" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="none" points="517.16,72.14,536.03,62.51,527.28,81.81,517.16,72.14" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[8d1d26efbaf4cf9bcbfb8fb22d302377]
 reverse link ActionListener to CourseController--><path d="M405.18,82.52 C404.57,96.99 403.87,113.59 403.18,129.8 " fill="none" id="ActionListener&lt;-CourseController" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="none" points="398.19,82.2,406.03,62.51,412.18,82.79,398.19,82.2" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[26870fba33b70a7caec39fbd747d7223]
 reverse link Observable to CourseData--><path d="M601.51,286.47 C587.05,310.67 571.47,336.73 558.17,358.99 " fill="none" id="Observable&lt;-CourseData" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="none" points="595.53,282.83,611.8,269.26,607.55,290.02,595.53,282.83" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[0a16fa0350ca3bc93fe1cb257d607ad4]
+
 @startuml
 interface Observer [[java:observer.pattern.Observer]] {
 	void update(Observable o)
